@@ -1,0 +1,20 @@
+@import "tailwindcss";
+:root {
+  --primary-color: #019376;
+  --gray-color: #e7e7e7;
+}
+.primary-color {
+  color: var(--primary-color);
+}
+.bg-primary-color {
+  background-color: var(--primary-color);
+}
+.bg-gray {
+  background-color: var(--gray-color);
+}
+
+.container {
+  max-width: 100%;
+  height: auto;
+  padding: 0 15px;
+}
