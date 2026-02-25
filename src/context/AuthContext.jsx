@@ -21,41 +21,32 @@ export function AuthProvider({ children }) {
       const userId = authData.user.id;
 
       // 2️⃣ Insert into profiles
-      const { data: profileData, error: profileError } = await supabase
-        .from("profiles")
-        .insert([
-          {
-            id: userId,
-            username: formData.username,
-            firstname: formData.first_name,
-            lastname: formData.last_name,
-            email: formData.email,
-            phone: formData.phone,
-          },
-        ])
-        .select()
-        .single();
+      const { error: profileError } = await supabase.from("profiles").insert([
+        {
+          id: userId,
+          username: formData.username,
+          first_name: formData.firstname,
+          last_name: formData.lastname,
+          email: formData.email,
+          phone: formData.phone,
+        },
+      ]);
 
       if (profileError) throw profileError;
 
       // 3️⃣ Insert into addresses
-      const { data: addressData, error: addressError } = await supabase
-        .from("addresses")
-        .insert([
-          {
-            user_id: userId, // link to profile
-            address_line1: formData.address,
-            city: formData.city,
-            state: formData.state,
-            country: formData.country,
-          },
-        ])
-        .select()
-        .single();
+      const { error: addressError } = await supabase.from("addresses").insert([
+        {
+          user_id: userId, // link to profile
+          address_line1: formData.address,
+          city: formData.city,
+          state: formData.state,
+          country: formData.country,
+        },
+      ]);
 
       if (addressError) throw addressError;
-
-      return { success: true, profile: profileData, address: addressData };
+      return { success: false };
     } catch (error) {
       console.error("Error signing up: ", error);
       return { success: false, error };
@@ -90,12 +81,29 @@ export function AuthProvider({ children }) {
   };
 
   // Sign out
-  async function signOut() {
+  const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.error("Error signing out:", error);
     }
-  }
+  };
+
+  // reset password
+  const resetPassword = async (email) => {
+    try {
+      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: "https://yourapp.com/update-password",
+      });
+
+      if (error) throw error;
+
+      console.log("Password reset email sent!", data);
+      return { success: true };
+    } catch (error) {
+      console.error("Error sending reset email:", error.message);
+      return { success: false, error: error.message };
+    }
+  };
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -107,9 +115,21 @@ export function AuthProvider({ children }) {
     });
   }, []);
 
+  const currencySymbol = (amount) => {
+    return `$${amount.toFixed(2)}`;
+  };
+
   return (
     <AuthContext.Provider
-      value={{ session, setSession, signUpNewUser, signInUser, signOut }}
+      value={{
+        session,
+        setSession,
+        signUpNewUser,
+        signInUser,
+        signOut,
+        resetPassword,
+        currencySymbol,
+      }}
     >
       {children}
     </AuthContext.Provider>

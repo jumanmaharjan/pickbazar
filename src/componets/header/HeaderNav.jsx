@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { menuData } from "./menudata";
 import { IoIosArrowDown } from "react-icons/io";
 import { HiMenu, HiX } from "react-icons/hi";
+import { IoCloseSharp } from "react-icons/io5";
 
 function HeaderNav() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,17 +17,22 @@ function HeaderNav() {
     <nav
       className={
         menuOpen
-          ? "fixed top-0 left-0 right-0 bottom-0 z-10 bg-white"
-          : "md:relative grow"
+          ? "fixed nav-menu top-0 left-0 right-0 bottom-0 z-10 bg-white"
+          : "md:relative nav-menu grow"
       }
     >
       {/* Mobile Toggle */}
-      <div className="md:hidden md:top-0 md:right-0 flex justify-end p-4">
+      <div className="md:hidden md:top-0 md:right-0  flex-wrap flex justify-end p-4">
         <button onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <HiX size={26} /> : <HiMenu size={26} />}
         </button>
       </div>
-
+      {/* <span
+        onClick={() => setMenuOpen(!menuOpen)}
+        className=" absolute z-10 top-2 right-2"
+      >
+        <IoCloseSharp />
+      </span> */}
       <ul
         className={`md:flex items-center capitalize  gap-4 
         ${menuOpen ? "block" : "hidden"} 
@@ -51,6 +57,7 @@ function HeaderNav() {
                 md:opacity-0 md:invisible
                 md:group-hover:opacity-100 md:group-hover:visible
                 transition-all duration-200
+                z-10
                 ${openDropdown === item.label ? "block" : "hidden md:block"}
                 `}
               >

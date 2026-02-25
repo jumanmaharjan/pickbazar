@@ -39,7 +39,7 @@ const vouchers = [
 function VoucherSlider() {
   return (
     <Swiper
-      modules={[Navigation, Pagination]}
+      modules={[Pagination]}
       spaceBetween={20}
       navigation
       pagination={{ clickable: true }}

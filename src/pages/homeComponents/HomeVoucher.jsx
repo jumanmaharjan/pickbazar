@@ -4,7 +4,7 @@ import VoucherSlider from "./homeVoucher/VoucherSlider";
 function HomeVoucher() {
   return (
     <>
-      <div className="home-vouchers-section my-4">
+      <div className="home-vouchers-section my-16">
         <VoucherSlider />
       </div>
     </>

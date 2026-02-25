@@ -72,7 +72,6 @@ const Signup = () => {
 
     try {
       const result = await signUpNewUser(formData);
-
       if (result?.success) {
         navigate("/");
       } else {

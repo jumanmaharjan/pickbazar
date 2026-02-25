@@ -2,6 +2,7 @@ import React from "react";
 import HomeBanner from "./homeComponents/HomeBanner";
 import HomeVoucher from "./homeComponents/HomeVoucher";
 import HomeCategory from "./homeComponents/HomeCategory";
+import HomeBestSell from "./homeComponents/HomeBestSell";
 
 function Home() {
   return (
@@ -10,8 +11,8 @@ function Home() {
         <HomeBanner />
         <HomeVoucher />
         <HomeCategory />
+        <HomeBestSell />
       </main>
-      <div className="container">home</div>
     </>
   );
 }

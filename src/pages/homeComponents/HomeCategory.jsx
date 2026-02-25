@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "../../SupabaseClient";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { Link } from "react-router-dom";
 
 function HomeCategory() {
   const [category, setCategory] = useState([]);
@@ -25,12 +26,16 @@ function HomeCategory() {
   const getImageUrl = (path) => {
     return supabase.storage.from("food").getPublicUrl(path).data.publicUrl;
   };
-  //   console.log(category);
+
   return (
     <>
-      <div>
-        <h4>What food you love to order</h4>
-        <p>Here order your favorite foods from different categories</p>
+      <div className="container text-center mb-16">
+        <h4 className="text-3xl font-semibold mb-4 primary-color">
+          What food you love to order
+        </h4>
+        <p className="mb-10">
+          Here order your favorite foods from different categories
+        </p>
 
         <Swiper
           modules={[Navigation, Pagination]}
@@ -46,21 +51,23 @@ function HomeCategory() {
         >
           {category.map((p) => (
             <SwiperSlide key={p.id}>
-              {p.imageName && (
-                <img
-                  src={getImageUrl(p.imageName)}
-                  alt={p.productCat}
-                  width={120}
-                  height={120}
-                  style={{
-                    objectFit: "cover",
-                    borderRadius: "50%",
-                    backgroundColor: "#e6e8eb",
-                    margin: "0 auto 10px",
-                  }}
-                />
-              )}
-              <h3 className="text-center">{p.productCat}</h3>
+              <Link to={`/categories/${p.id}`} key={p.id}>
+                {p.imageName && (
+                  <img
+                    src={getImageUrl(p.imageName)}
+                    alt={p.productCat}
+                    width={120}
+                    height={120}
+                    style={{
+                      objectFit: "cover",
+                      borderRadius: "50%",
+                      backgroundColor: "#e6e8eb",
+                      margin: "0 auto 10px",
+                    }}
+                  />
+                )}
+                <h3 className="text-center">{p.productCat}</h3>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
