@@ -1,6 +1,6 @@
 import React from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import GetAllProduct from "../../admin/product/getallProduct";
+import GetAllProduct from "../../admin/product/GetallProduct";
 import { Link } from "react-router-dom";
 function HomeBestSell() {
   return (
@@ -9,7 +9,7 @@ function HomeBestSell() {
         <h6 className="text-2xl font-semibold primary-color">
           Weekly Best Sales
         </h6>
-        <div className=" primary-color relative after:content-[''] after:block after:w-full after:h-px after:bg-[#019376] ">
+        <div className=" primary-color relative after:content-[''] after:block after:w-full after:h-px after:bg-primary">
           <Link
             to={"/allproducts"}
             className="flex text-sm gap-1 items-center capitalize"
