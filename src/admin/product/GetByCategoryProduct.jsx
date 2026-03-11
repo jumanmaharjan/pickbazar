@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../SupabaseClient";
 import ProductPopupModel from "./compoments/ProductPopupModel";
-import Card from "./compoments/productCards/card";
+import Card from "./compoments/productCards/Card";
 import { useParams, Link } from "react-router-dom";
 
 function GetByCategoryProduct() {

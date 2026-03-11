@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { IoSearch } from "react-icons/io5";
 import { IoIosClose } from "react-icons/io";
 import { UseSearch } from "../../context/SearchContext";
-import Card from "../../admin/product/compoments/productCards/card";
+import Card from "../../admin/product/compoments/productCards/Card";
 
 function HeaderSearch() {
   const {
