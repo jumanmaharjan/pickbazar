@@ -107,7 +107,7 @@ function EditProductModal({ product, onClose, onUpdated }) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded w-[420px] space-y-2">
+      <div className="bg-white p-6 rounded w-105 space-y-2">
         <h3 className="font-bold mb-3">Edit Product</h3>
 
         {/* Image Preview */}
@@ -202,10 +202,10 @@ function EditProductModal({ product, onClose, onUpdated }) {
           </label>
         </div>
 
-        <div className="flex gap-2 justify-end pt-3">
+        <div className="flex gap-3 justify-end pt-3">
           <button onClick={onClose}>Cancel</button>
           <button
-            className="bg-black text-white px-3 py-1"
+            className="bg-black text-white px-3 py-1 rounded"
             onClick={handleUpdate}
           >
             Save

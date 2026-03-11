@@ -8,7 +8,7 @@ import HeaderSignin from "./HeaderSignin";
 function Header() {
   return (
     <>
-      <header className="header-wrapper  bg-primary ">
+      <header className="header-wrapper">
         <div className="container">
           <div className="top-header flex items-center ">
             <figure className="brand-logo min-w-25 t-left mr-4 lg:mr-8">

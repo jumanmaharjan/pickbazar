@@ -6,14 +6,15 @@ import AddToCartButton from "./AddToCartButton";
 import { UseCart } from "../../../../context/CartContext";
 import ProductQuickViewIcon from "./image-icons/ProductQuickViewIcon";
 import ProductWishlistIcon from "./image-icons/ProductWishlistIcon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProductAddedToast from "./ProductAddedToast";
 import { UserAuth } from "../../../../context/AuthContext";
+import Signin from "../../../../pages/authComponents/signin/Signin";
 
 function Card({ productInfo, setSelectedProduct }) {
   const { addToCart } = UseCart();
   const [showToast, setShowToast] = useState(false);
-
+  const navigate = useNavigate();
   const { session } = UserAuth();
   const user = session?.user;
   // If productInfo is undefined, render nothing or a placeholder
@@ -31,7 +32,7 @@ function Card({ productInfo, setSelectedProduct }) {
   } = productInfo;
 
   return (
-    <div className="border border-[#d6d6d6] rounded-lg py-3 px-2.5 flex flex-col justify-between items-center gap-2 cursor-pointer hover:shadow-lg">
+    <div className="border border-[#d6d6d6] rounded-lg py-3 px-2.5 flex flex-col justify-between items-center gap-2  hover:shadow-lg">
       <figure className="relative group rounded-lg overflow-hidden">
         <ProductImage
           src={product_img || "/assets/img/default-img.png"} // default image
@@ -47,17 +48,17 @@ function Card({ productInfo, setSelectedProduct }) {
 
         <div className="absolute top-1 left-1 z-2 flex gap-1 flex-col">
           {is_hot && (
-            <span className="px-4 py-1 capitalize text-sm font-semibold bg-red-400 leading-none text-white rounded">
+            <span className="px-3 py-1 capitalize text-xs font-semibold bg-red-400 leading-none text-white rounded">
               hot
             </span>
           )}
           {is_new && (
-            <span className="px-4 py-1 capitalize text-sm font-semibold bg-amber-300 leading-none text-white rounded">
+            <span className="px-3 py-1 capitalize text-xs font-semibold bg-amber-300 leading-none text-white rounded">
               new
             </span>
           )}
           {is_sale && (
-            <span className="px-4 py-1 capitalize text-sm font-semibold bg-green-500 leading-none text-white rounded">
+            <span className="px-3 py-1 capitalize text-xs font-semibold bg-green-500 leading-none text-white rounded">
               sale
             </span>
           )}
@@ -77,11 +78,14 @@ function Card({ productInfo, setSelectedProduct }) {
         <AddToCartButton
           onClick={async (e) => {
             e.stopPropagation();
-            await addToCart({
+            const res = await addToCart({
               productId: product_id,
               quantity: 1,
               price: sale_price ?? product_price ?? 0,
             });
+            if (res?.error === "not_auth") {
+              navigate("/signin");
+            }
             console.log("Added to cart:", productInfo);
             if (user) setShowToast(true);
           }}

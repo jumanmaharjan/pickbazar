@@ -18,6 +18,8 @@ import GetLimitProduct from "./admin/product/GetLimitProduct";
 import AboutPage from "./pages/AboutPage";
 import OrdersDashboard from "./admin/product/compoments/OrdersDashboard";
 import OrderItems from "./admin/product/compoments/OrderItems";
+import ContactPage from "./pages/ContactPage";
+import GetAllProduct from "./admin/product/GetallProduct";
 
 function App() {
   return (
@@ -40,12 +42,14 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/allproducts" element={<GetLimitProduct />} />
           <Route path="/allorders" element={<OrdersDashboard />} />
+          <Route path="/contact" element={<ContactPage />} />
 
           <Route path="/admin">
             <Route path="add-product" element={<AddProduct />} />
             <Route path="update-product" element={<UpdateProduct />} />
           </Route>
           <Route path="/product/:id" element={<GetSingleProduct />} />
+          <Route path="/categories" element={<GetAllProduct />} />
           <Route path="/categories/:id" element={<GetByCategoryProduct />} />
           <Route path="/orders/:id" element={<OrderItems />} />
         </Route>

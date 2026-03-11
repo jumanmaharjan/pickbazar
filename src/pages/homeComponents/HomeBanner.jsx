@@ -69,11 +69,11 @@ function HomeBanner() {
                 onClick={(e) => e.stopPropagation()}
               >
                 {results.map((product) => (
-                  <Link to={`/product/${product.product_id}`}>
-                    <div
-                      key={product.product_id}
-                      className="flex items-center justify-start capitalize gap-1.5"
-                    >
+                  <Link
+                    key={product.product_id}
+                    to={`/product/${product.product_id}`}
+                  >
+                    <div className="flex items-center justify-start capitalize gap-1.5">
                       <figure className="w-12.5 h-12.5 shrink-0 flex items-center justify-center rounded">
                         <img
                           src={

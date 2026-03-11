@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
 
   const signUpNewUser = async (formData) => {
     try {
-      // 1️⃣ Sign up user in Auth
+      // Create Auth user
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -18,38 +18,36 @@ export function AuthProvider({ children }) {
 
       if (authError) throw authError;
 
-      const userId = authData.user.id;
+      const userId = authData?.user?.id;
+      if (!userId) throw new Error("User ID not returned from auth");
 
-      // 2️⃣ Insert into profiles
-      const { error: profileError } = await supabase.from("profiles").insert([
-        {
-          id: userId,
-          username: formData.username,
-          first_name: formData.firstname,
-          last_name: formData.lastname,
-          email: formData.email,
-          phone: formData.phone,
-        },
-      ]);
+      // Insert Profile
+      const { error: profileError } = await supabase.from("profiles").insert({
+        id: userId,
+        username: formData.username,
+        first_name: formData.firstname,
+        last_name: formData.lastname,
+        email: formData.email,
+        phone: formData.phone,
+      });
 
       if (profileError) throw profileError;
 
-      // 3️⃣ Insert into addresses
-      const { error: addressError } = await supabase.from("addresses").insert([
-        {
-          user_id: userId, // link to profile
-          address_line1: formData.address,
-          city: formData.city,
-          state: formData.state,
-          country: formData.country,
-        },
-      ]);
+      // Insert Address
+      const { error: addressError } = await supabase.from("addresses").insert({
+        user_id: userId,
+        address_line1: formData.address,
+        city: formData.city,
+        state: formData.state,
+        country: formData.country,
+      });
 
       if (addressError) throw addressError;
-      return { success: false };
+
+      return { success: true };
     } catch (error) {
-      console.error("Error signing up: ", error);
-      return { success: false, error };
+      console.error("Error signing up:", error);
+      return { success: false, error: error.message };
     }
   };
 

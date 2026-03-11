@@ -53,16 +53,19 @@ function HeaderNav() {
               <ul
                 className={`
                 md:absolute md:top-full md:left-0
-                bg-white rounded shadow-xl w-56 px-3 py-2
+                bg-white rounded shadow-xl w-full md:w-56 px-3 py-2
                 md:opacity-0 md:invisible
                 md:group-hover:opacity-100 md:group-hover:visible
-                transition-all duration-200
-                z-10
+                transition-all duration-200 
+                z-10 
                 ${openDropdown === item.label ? "block" : "hidden md:block"}
                 `}
               >
                 {item.children.map((child) => (
-                  <li key={child.label} className="py-2">
+                  <li
+                    key={child.label}
+                    className="py-2 hover:text-primary-hover transition"
+                  >
                     <NavLink to={child.path}>{child.label}</NavLink>
                   </li>
                 ))}

@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "../../../SupabaseClient";
 import { Link, useParams } from "react-router-dom";
 import ProductDescription from "./ProductDescription";
+import { UserAuth } from "../../../context/AuthContext";
+import RelatedsProduct from "../compoments/RelatedsProduct";
+import ProductAddedToast from "../compoments/productCards/ProductAddedToast";
 
 function GetSingleProduct() {
+  const { currencySymbol } = UserAuth();
   const { id } = useParams();
   const [product, setProduct] = useState();
   const [quantity, setQuantity] = useState(1);
+  const [showToast, setShowToast] = useState(false);
 
   const getOrCreateCart = async (userId) => {
     const { data: cart, error } = await supabase
@@ -69,8 +74,8 @@ function GetSingleProduct() {
           price,
         });
       }
-
-      alert("Product added to cart!");
+      setShowToast(true);
+      // alert("Product added to cart!");
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -90,7 +95,7 @@ function GetSingleProduct() {
 
     fetchProduct();
   }, [id]);
-  console.log(product);
+
   if (!product) return <div>Product not found</div>;
   return (
     <>
@@ -110,14 +115,16 @@ function GetSingleProduct() {
             {product.sale_price ? (
               <div>
                 <span className="font-bold text-2xl">
-                  ${product.sale_price}
+                  {currencySymbol(product.sale_price)}
                 </span>
                 <span className="ml-2 line-through">
-                  ${product.product_price}
+                  {currencySymbol(product.product_price)}
                 </span>
               </div>
             ) : (
-              <span>${product.product_price}</span>
+              <span className="font-bold text-2xl">
+                {currencySymbol(product.product_price)}
+              </span>
             )}
           </div>
           <h5 className="mb-2">
@@ -154,16 +161,23 @@ function GetSingleProduct() {
             />
             <button
               type="submit"
-              className="text-white bg-primary-color p-2 px-4 font-semibold rounded"
+              className="text-white bg-primary-color p-2 px-4 cursor-pointer font-semibold rounded"
             >
               Add to cart
             </button>
           </form>
+          <ProductAddedToast
+            show={showToast}
+            onClose={() => setShowToast(false)}
+            message={`${product.product_name} added to cart`}
+          />
 
           <p>{product.product_desc}</p>
         </div>
       </div>
       <ProductDescription />
+
+      <RelatedsProduct productCategoryid={product.product_category_id} />
     </>
   );
 }

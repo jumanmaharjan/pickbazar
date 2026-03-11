@@ -74,7 +74,7 @@ export default function AboutPage() {
         <p>Have questions or want to collaborate? Reach out to us anytime!</p>
         <a
           href="mailto:contact@yourcompany.com"
-          className="inline-block bg-white text-primary-color font-semibold px-6 py-3 rounded hover:bg-gray-100 transition"
+          className="inline-block border-white border text-primary-color font-semibold px-6 py-3 rounded hover:border-gray-100 hover:text-gray-100 transition"
         >
           Contact Us
         </a>

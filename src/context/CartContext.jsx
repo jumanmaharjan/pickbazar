@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../SupabaseClient";
-import SignInForm from "../pages/authComponents/signin/SignInForm";
 
 const CartContext = createContext();
 
@@ -85,10 +84,10 @@ export const CartProvider = ({ children }) => {
 
   // 🔹 Add to cart
   const addToCart = async ({ productId, quantity, price }) => {
-    if (!user) {
-      alert("Please sign in to add items to cart");
-      return;
-    }
+    if (!user)
+      return {
+        error: "not_auth",
+      };
 
     try {
       const cart_id = await getOrCreateCart(user.id);

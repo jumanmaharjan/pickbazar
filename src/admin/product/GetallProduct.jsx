@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../SupabaseClient";
 import ProductPopupModel from "./compoments/ProductPopupModel";
-import Card from "./compoments/productCards/card";
+import Card from "./compoments/productCards/Card";
 import SkeletonCards from "./compoments/skeleton/SkeletonCards";
 
-function GetAllProduct({ limit = null }) {
+function GetAllProduct({ limit = null, category_id = null }) {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,6 +15,10 @@ function GetAllProduct({ limit = null }) {
     const fetchProductInfo = async () => {
       setLoading(true);
       let query = supabase.from("productDetail").select("*");
+
+      if (category_id !== null) {
+        query = query.eq("product_category_id", category_id);
+      }
 
       if (limit !== null) {
         query = query.limit(limit);
@@ -27,7 +31,7 @@ function GetAllProduct({ limit = null }) {
     };
 
     fetchProductInfo();
-  }, [limit]);
+  }, [limit, category_id]);
 
   if (error) return <p className="text-red-500">{error}</p>;
 

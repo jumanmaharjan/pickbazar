@@ -86,7 +86,7 @@ export default function Checkout() {
         return;
       }
 
-      // 1️⃣ Create Order
+      //Create Order
       const { data: order, error: orderError } = await supabase
         .from("orders")
         .insert([
@@ -108,7 +108,7 @@ export default function Checkout() {
 
       if (orderError) throw orderError;
 
-      // 2️⃣ Insert Order Items
+      // Insert Order Items
       const orderItems = cartItems.map((item) => ({
         order_id: order.id,
         product_id: item.product_id,
@@ -122,7 +122,30 @@ export default function Checkout() {
 
       if (itemsError) throw itemsError;
 
-      // 3️⃣ Clear Cart
+      // update quantity
+      for (const item of cartItems) {
+        const { data: product, error: fetchError } = await supabase
+          .from("productDetail")
+          .select("stock")
+          .eq("product_id", item.product_id)
+          .single();
+        if (fetchError) throw fetchError;
+
+        const newStock = product.stock - item.quantity;
+        if (newStock < 0) {
+          alert(`Not enough stock for ${item.product_name}`);
+          throw new Error("Insufficient stock");
+        }
+
+        const { error: updateError } = await supabase
+          .from("productDetail")
+          .update({ stock: newStock })
+          .eq("product_id", item.product_id);
+
+        if (updateError) throw updateError;
+      }
+
+      // Clear Cart
       await supabase.from("cart_items").delete().eq("user_id", user.id);
 
       // Refresh cart context
@@ -155,14 +178,14 @@ export default function Checkout() {
                 placeholder={key}
                 value={formData[key]}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded"
+                className="w-full border px-3 py-2 text-sm border-gray-300 rounded"
               />
             ))}
 
             <h3 className="font-bold mt-4">Payment Method</h3>
 
             <select
-              className="w-full border px-3 py-2 rounded"
+              className="w-full border px-3 py-2 border-gray-300 rounded"
               value={paymentMethod}
               onChange={(e) => setPaymentMethod(e.target.value)}
             >

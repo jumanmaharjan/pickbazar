@@ -3,7 +3,6 @@ import { supabase } from "../../../SupabaseClient";
 
 function DeleteConfirmModal({ product, onClose, onDeleted }) {
   const handleDelete = async () => {
-    console.log(product.product_id);
     const { error } = await supabase
       .from("productDetail")
       .delete()

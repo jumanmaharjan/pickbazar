@@ -1,5 +1,6 @@
 import React from "react";
 import { UseCart } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 export default function CartPage() {
   const { cartItems, cartCount, amount, updateQuantity, removeFromCart } =
@@ -85,9 +86,12 @@ export default function CartPage() {
               <span>Total</span>
               <span>${amount.total.toFixed(2)}</span>
             </div>
-            <button className="w-full bg-primary-color text-white py-3 rounded hover:bg-primary-color-dark transition">
+            <Link
+              to="/checkout"
+              className="w-full block text-center bg-primary-color text-white py-3 rounded hover:bg-primary-color-dark transition"
+            >
               Proceed to Checkout
-            </button>
+            </Link>
           </div>
         </div>
       )}

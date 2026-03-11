@@ -35,7 +35,7 @@ export const menuData = [
   },
   {
     label: "admin",
-    path: "/",
+    path: "/admin",
     children: [
       { label: "add product", path: "/admin/add-Product" },
       { label: "update product", path: "/admin/update-Product" },

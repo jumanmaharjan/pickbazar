@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../../SupabaseClient";
+import { UserAuth } from "../../../context/AuthContext";
+import { RiCloseFill } from "react-icons/ri";
 
 function ProductPopupModel({ selectedProduct, setSelectedProduct }) {
   const [quantity, setQuantity] = useState(1);
-
+  const { currencySymbol } = UserAuth();
   if (!selectedProduct) return null;
 
   const getOrCreateCart = async (userId) => {
@@ -87,10 +89,10 @@ function ProductPopupModel({ selectedProduct, setSelectedProduct }) {
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="absolute top-2 right-2 text-gray-600 font-bold"
+          className="absolute top-2 right-4 text-gray-600 hover:text-red-600 transition-all font-bold"
           onClick={() => setSelectedProduct(null)}
         >
-          ✖
+          <RiCloseFill />
         </button>
 
         <div className="product-detail flex gap-6">
@@ -111,14 +113,14 @@ function ProductPopupModel({ selectedProduct, setSelectedProduct }) {
               {selectedProduct.sale_price ? (
                 <div>
                   <span className="font-bold text-xl">
-                    ${selectedProduct.sale_price}
+                    {currencySymbol(selectedProduct.sale_price)}
                   </span>
                   <span className="ml-2 text-gray-300 line-through">
-                    ${selectedProduct.product_price}
+                    {currencySymbol(selectedProduct.product_price)}
                   </span>
                 </div>
               ) : (
-                <span>${selectedProduct.product_price}</span>
+                <span>{currencySymbol(selectedProduct.product_price)}</span>
               )}
             </div>
 
@@ -145,7 +147,7 @@ function ProductPopupModel({ selectedProduct, setSelectedProduct }) {
 
             <Link
               to={`/product/${selectedProduct.product_id}`}
-              className="text-white self-start px-4 font-semibold bg-black p-2 rounded"
+              className="text-white text-sm self-start px-4 font-semibold bg-black p-2 rounded"
             >
               View Product
             </Link>
