@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { supabase } from "../../SupabaseClient";
 import ProductPopupModel from "./compoments/ProductPopupModel";
-import Card from "./compoments/productCards/card";
+import Card from "./compoments/productCards/Card";
 import SkeletonCards from "./compoments/skeleton/SkeletonCards";
 
 const PAGE_SIZE = 4;

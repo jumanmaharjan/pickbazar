@@ -23,7 +23,7 @@ function DeleteConfirmModal({ product, onClose, onDeleted }) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded w-[350px]">
+      <div className="bg-white p-6 rounded w-87.5">
         <h3 className="font-bold mb-4">Delete "{product.product_name}"?</h3>
 
         <div className="flex justify-end gap-2">
