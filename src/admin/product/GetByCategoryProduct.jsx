@@ -21,7 +21,6 @@ function GetByCategoryProduct() {
           .from("productDetail")
           .select("*")
           .eq("product_category_id", categoryId);
-
         if (error) throw error;
 
         setProducts(data || []);
@@ -55,12 +54,25 @@ function GetByCategoryProduct() {
     return supabase.storage.from("food").getPublicUrl(path).data.publicUrl;
   };
 
+  useEffect(() => {
+    if (categories.length > 0) {
+      const found = categories.filter(
+        (category) => Number(category.id) === Number(categoryId),
+      );
+      console.log("Found category:", found);
+    }
+  }, [categories, categoryId]);
+  // console.log(categories);
+  // console.log(categoryId);
+  // console.log(currentCategory);
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
     <>
       <div className="container">
-        <h2 className="text-xl font-bold mb-4">All Products</h2>
+        <h2 className="text-2xl capitalize font-bold mt-8 mb-6">
+          {/* All {currentCategory?.productCat} */}
+        </h2>
         <div className="grid  grid-cols-[20%_auto] items-start ">
           <div className="mr-5">
             {categories.length === 0 ? (

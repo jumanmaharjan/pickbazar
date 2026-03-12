@@ -20,6 +20,7 @@ import OrdersDashboard from "./admin/product/compoments/OrdersDashboard";
 import OrderItems from "./admin/product/compoments/OrderItems";
 import ContactPage from "./pages/ContactPage";
 import GetAllProduct from "./admin/product/GetallProduct";
+import GetAllProductByCategory from "./admin/product/GetAllProductByCategory";
 
 function App() {
   return (
@@ -49,7 +50,7 @@ function App() {
             <Route path="update-product" element={<UpdateProduct />} />
           </Route>
           <Route path="/product/:id" element={<GetSingleProduct />} />
-          <Route path="/categories" element={<GetAllProduct />} />
+          <Route path="/categories" element={<GetAllProductByCategory />} />
           <Route path="/categories/:id" element={<GetByCategoryProduct />} />
           <Route path="/orders/:id" element={<OrderItems />} />
         </Route>

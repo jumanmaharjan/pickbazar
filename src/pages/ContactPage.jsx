@@ -74,7 +74,7 @@ function ContactPage() {
               </div>
             </div>
             <div className="rounded-lg bg-white basis-[60%] p-5">
-              <h4 class="mb-7  text-xl font-bold  md:text-2xl">
+              <h4 className="mb-7  text-xl font-bold  md:text-2xl">
                 How can we improve your experience?
               </h4>
               <form className="max-w-3xl mx-auto p-4">
