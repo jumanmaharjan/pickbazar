@@ -11,7 +11,9 @@ createRoot(document.getElementById("root")).render(
     <AuthProvider>
       <CartProvider>
         <SearchProvider>
-          <App />
+          <div className=" dark:bg-gray-900 dark:text-gray-50 transition-colors duration-300">
+            <App />
+          </div>
         </SearchProvider>
       </CartProvider>
     </AuthProvider>

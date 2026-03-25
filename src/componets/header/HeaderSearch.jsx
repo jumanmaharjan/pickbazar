@@ -31,7 +31,7 @@ function HeaderSearch() {
   }, [showSearch]);
 
   return (
-    <div>
+    <div className="leading-none">
       {/* Search Icon */}
       <button onClick={openSearch}>
         <IoSearch className="w-5 h-5" />

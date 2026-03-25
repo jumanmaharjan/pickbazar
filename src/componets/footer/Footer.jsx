@@ -35,7 +35,7 @@ function Footer() {
   return (
     <footer className="bg-[#f7f7f7] pt-15 pb-6 mt-12">
       <div className="container mx-auto">
-        <div className="grid lg:grid-cols-[40%_20%_20%_20%] grid-cols-2 gap-5">
+        <div className="grid lg:grid-cols-[2fr_1fr_1fr_1fr] sm:grid-cols-2 gap-5">
           {/* Brand Section */}
           <div className="footer-item">
             <figure className="brand-logo min-w-25 mb-6">
@@ -54,7 +54,7 @@ function Footer() {
 
           {footerLinks.map((section) => (
             <div className="footer-items" key={section.section}>
-              <h4 className="text-lg primary-color font-semibold mb-4">
+              <h4 className="text-lg primary-color font-semibold mb-4 whitespace-normal break-words">
                 {section.section}
               </h4>
               <ul className="space-y-2">

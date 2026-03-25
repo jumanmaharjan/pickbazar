@@ -24,7 +24,7 @@ function HeaderCart() {
           onClick={() => setClose(false)}
         >
           <div
-            className="bg-white px-5 py-3 w-87.5 flex flex-col absolute top-0 right-0 h-full"
+            className="bg-white px-5 py-3 sm:min-w-[350px] min-w-full flex flex-col absolute top-0 right-0 h-full"
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="text-3xl font-semibold mb-3 capitalize">

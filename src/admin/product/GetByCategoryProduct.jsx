@@ -73,7 +73,7 @@ function GetByCategoryProduct() {
         <h2 className="text-2xl capitalize font-bold mt-8 mb-6">
           {/* All {currentCategory?.productCat} */}
         </h2>
-        <div className="grid  grid-cols-[20%_auto] items-start ">
+        <div className="grid  grid-cols-[minmax(200px,20%)_auto] items-start ">
           <div className="mr-5">
             {categories.length === 0 ? (
               <p>No category found</p>
@@ -98,7 +98,7 @@ function GetByCategoryProduct() {
             <p>No products found</p>
           ) : (
             <>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
                 {products.map((product) => (
                   <Card
                     key={product.product_id}

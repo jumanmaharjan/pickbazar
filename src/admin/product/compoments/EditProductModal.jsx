@@ -107,7 +107,7 @@ function EditProductModal({ product, onClose, onUpdated }) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded w-105 space-y-2">
+      <div className="bg-white p-6 rounded w-105 space-y-2 max-h-[98vh] overflow-auto">
         <h3 className="font-bold mb-3">Edit Product</h3>
 
         {/* Image Preview */}
