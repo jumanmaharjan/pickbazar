@@ -69,11 +69,11 @@ function HeaderSignin() {
           </span>
 
           <div
-            className="absolute w-[320px] top-full  left-1/2 -translate-x-1/2
+            className="absolute w-[200px] top-full  left-1/2 -translate-x-1/2
                   opacity-0 group-hover:opacity-100
                   pointer-events-none group-hover:pointer-events-auto
                   transition-all duration-200
-                  text-center p-2 rounded border bg-white shadow-md"
+                  text-center p-2 font-semibold rounded bg-red-600 text-white shadow-md hover:bg-red-700 cursor-pointer"
           >
             <SignOut />
           </div>

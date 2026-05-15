@@ -35,15 +35,15 @@ function Footer() {
   return (
     <footer className="bg-[#f7f7f7] pt-15 pb-6 mt-12">
       <div className="container mx-auto">
-        <div className="grid lg:grid-cols-[2fr_1fr_1fr_1fr] sm:grid-cols-2 gap-5">
+        <div className="grid lg:grid-cols-[2fr_1fr_1fr_1fr] sm:grid-cols-2 grid-cols-1  gap-5">
           {/* Brand Section */}
-          <div className="footer-item">
+          <div className="footer-item  sm:col-span-1 col-span-2 ">
             <figure className="brand-logo min-w-25 mb-6">
               <Link to="/">
                 <img src="Logo-new.png" alt="brand logo" />
               </Link>
             </figure>
-            <p className="text-gray-500 text-sm">
+            <p className="text-gray-500 text-sm ">
               Voluptatibus atque habitasse? Cum, parturient, irure. Nunc, illo,
               vehicula. Temporibus, laoreet et, praesentium enim quidem,
               imperdiet facilisis unde, lacinia, eligendi? Animi architecto

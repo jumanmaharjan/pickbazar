@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant smx (min-width: 425px);
 @theme {
   --color-primary: #019376;
   --color-primary-hover: #04a282;
+  --breakpoint-smx: 425px;
 }
 body {
   font-family: "Inter", sans-serif;
