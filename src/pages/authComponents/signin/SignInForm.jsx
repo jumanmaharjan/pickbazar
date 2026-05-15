@@ -80,11 +80,11 @@ function SignInForm() {
   };
 
   return (
-    <div className="signin-wrapper m-auto text-center flex items-center shadows justify-center bg-white max-w-250">
-      <figure className="sm:basis-[60%] basis-[40%]">
+    <div className="signin-wrapper m-auto text-center flex items-center shadows justify-center relative bg-white max-w-250">
+      <figure className="sm:basis-[60%] basis-[40%] absolute inset-0 ">
         <img src="assets/img/login.png" alt="Login illustration" />
       </figure>
-      <div className="sm:basis-[40%] basis-[60%]">
+      <div className="sm:basis-[40%] basis-auto z-[2] bg-[#ffffff91]">
         <form
           onSubmit={handleSubmit}
           className=" flex flex-col justify-center gap-3 sm:py-10 sm:px-12 p-6"
